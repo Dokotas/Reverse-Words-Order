@@ -1,0 +1,10 @@
+Package: RWO
+Version: 1.0
+Section: uncrown
+Priority: optional
+Depends: libstdc++6, libc6
+Architecture: amd64
+Essential: no
+Installed-Size: 20 # значение из результата команды du -k ./main
+Maintainer: dokotas.RWO <dokotas@dokotasOrg.RWO>
+Description: Take string from input and return string with reversed words order
