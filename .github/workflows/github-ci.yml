@@ -38,7 +38,5 @@ jobs:
             - name: make test
               run: make -f TestMakefile all							
             - name: build-package
-              run: dpkg-deb --build ./package		
-            - name: install-package
-              run: sudo dpkg -i ./package.deb												
+              run: dpkg-deb --build ./package													
 							
