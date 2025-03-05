@@ -1,5 +1,5 @@
 Package: RWO
-Version: .1.0
+Version: 1.0
 Section: uncrown
 Priority: optional
 Depends: libstdc++6, libc6
