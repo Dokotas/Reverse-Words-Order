@@ -4,10 +4,10 @@ on: [push]
 
 jobs:
     lint:
-				name: Update version
+        name: Update version
         runs-on: ubuntu-latest
         steps:
             - name: checkout repo
               uses: actions/checkout@v4
-						- name: make
+            - name: make
               run: make all
