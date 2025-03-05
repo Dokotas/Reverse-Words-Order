@@ -26,3 +26,19 @@ jobs:
               run: make -f TestMakefile all							
             - name: Test
               run: ./test
+    build:
+        needs: [test]	
+        name: RunPackage
+        runs-on: self-hosted
+        steps:
+            - name: checkout repo
+              uses: actions/checkout@v4
+            - name: make
+              run: make all
+            - name: make test
+              run: make -f TestMakefile all							
+            - name: build-package
+              run: dpkg-deb --build ./package		
+            - name: install-package
+              run: sudo dpkg -i ./package.deb												
+							
