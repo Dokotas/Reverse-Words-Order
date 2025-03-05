@@ -3,16 +3,18 @@ CC=g++
 #Это еще один комментарий. Он поясняет, что в переменной CFLAGS лежат флаги, которые передаются компилятору
 CFLAGS=-c
 
-all: main
+# target to create first shared library
+package/usr/lib/libRWOfunction.so: src/function.cpp
+	$(CC) src/function.cpp -o package/usr/lib/libRWOfunction.so -shared -fPIC  
 
-main: main.o function.o
-	$(CC) main.o function.o -o main
+test.o: src/test.cpp
+	$(CC) $(CFLAGS) src/test.cpp 
 
-main.o: main.cpp
-	$(CC) $(CFLAGS) main.cpp
+all: package/usr/lib/libRWOfunction.so test.o
+	$(CC) test.o -I/src package/usr/lib/libRWOfunction.so -o test 
 
-function.o: function.cpp
-	$(CC) $(CFLAGS) function.cpp
-	
 clean:
-	rm -rf *.o main
+	rm -rf *.so
+	rm -rf *.o*
+	rm -rf main
+	rm -rf test

@@ -23,5 +23,6 @@ string function(string str){
 	        result_string+=" ";
 		
 	}
-	return result_string;
+	result_string.erase(result_string.end()-1);
+        return result_string;
 }
