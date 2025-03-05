@@ -1,11 +1,13 @@
-name: CI
+name: Python packaging
 
 on: [push]
 
 jobs:
-    job1:
-        name: Update version
+    lint:
+				name: Update version
         runs-on: ubuntu-latest
         steps:
             - name: checkout repo
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
+						- name: make
+              run: make all
