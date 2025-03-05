@@ -14,6 +14,7 @@ jobs:
             - name: make test
               run: make -f TestMakefile all
     test:
+        needs: [lint]	
         name: RunTest
         runs-on: ubuntu-latest
         steps:
