@@ -18,9 +18,5 @@ jobs:
         name: RunTest
         runs-on: ubuntu-latest
         steps:
-            - name: checkout repo
-              uses: actions/checkout@v4
-            - name: make
-              run: make all
             - name: Test
               run: ./test
