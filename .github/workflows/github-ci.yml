@@ -46,5 +46,4 @@ jobs:
               arch: 'amd64' # optional
               depends: 'libc6 (>= 2.2.1), git' # optional
               desc: 'this is sample package.' # optional
-              homepage: 'https://github.com/Dokotas/Reverse-Words-Order' # optional      									
-							
+              homepage: 'https://github.com/Dokotas/Reverse-Words-Order' # optional      			
