@@ -47,7 +47,7 @@ jobs:
                desc: 'this is sample package.' # optional
                homepage: 'https://github.com/Dokotas/Reverse-Words-Order' # optional      			
     release:
-        needs: [build]	
+#        needs: [build]	
         name: Release
         runs-on: self-hosted
         steps:
