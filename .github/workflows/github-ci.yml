@@ -47,7 +47,7 @@ jobs:
                desc: 'this is sample package.' # optional
                homepage: 'https://github.com/Dokotas/Reverse-Words-Order' # optional      			
     release:
-#        needs: [build]	
+        needs: [build]	
         name: Release
         runs-on: self-hosted
         steps:
@@ -63,12 +63,12 @@ jobs:
                 release_name: Release v1.0
                 draft: false
                 prerelease: false
-            - name: Upload Release Asset
-              id: upload-release-asset 
-              uses: Fhwang0926/upload-release-asset@v1.1.8
-              env:
-                GITHUB_TOKEN: ${{ secrets.TOKEN }}
-              with:
-                upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-                asset_name: ./package.deb # path + filename
-                asset_label: latest
+            # - name: Upload Release Asset
+            #   id: upload-release-asset 
+            #   uses: Fhwang0926/upload-release-asset@v1.1.8
+            #   env:
+            #     GITHUB_TOKEN: ${{ secrets.TOKEN }}
+            #   with:
+            #     upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+            #     asset_name: ./package.deb # path + filename
+            #     asset_label: latest
