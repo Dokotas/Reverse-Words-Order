@@ -3,73 +3,47 @@ name: Python packaging
 on: [push]
 
 jobs:
-    # lint:
-    #     name: RunMake
-    #     runs-on: self-hosted
-    #     steps:
-    #         - name: checkout repo
-    #           uses: actions/checkout@v4
-    #         - name: make
-    #           run: make all
-    #         - name: make test
-    #           run: make -f TestMakefile all
-    # test:
-    #     needs: [lint]	
-    #     name: RunTest
-    #     runs-on: self-hosted
-    #     steps:
-    #         - name: checkout repo
-    #           uses: actions/checkout@v4
-    #         - name: make
-    #           run: make all
-    #         - name: make test
-    #           run: make -f TestMakefile all							
-    #         - name: Test
-    #           run: ./test
-    # build:
-    #     name: RunPackage
-    #     needs: [test]
-    #     runs-on: ubuntu-latest
-    #     steps:
-    #         - name: checkout repo
-    #           uses: actions/checkout@v4
-    #         - name: make
-    #           run: make all
-    #         - name: make test
-    #           run: make -f TestMakefile all							
-    #         - uses: jiro4989/build-deb-action@v4
-    #           with:
-    #            package: RWO
-    #            package_root: package
-    #            maintainer: Dokotas
-    #            version: 1.0 # refs/tags/v*.*.*
-    #            arch: 'amd64' # optional
-    #            depends: 'libc6 (>= 2.2.1), git' # optional
-    #            desc: 'this is sample package.' # optional
-    #            homepage: 'https://github.com/Dokotas/Reverse-Words-Order' # optional      			
-    release:
-        # needs: [build]	
-        name: Release
+    lint:
+        name: RunMake
         runs-on: self-hosted
         steps:
-            - name: checkout repos
+            - name: checkout repo
               uses: actions/checkout@v4
-            - name: Create Release
-              id: create_release
-              uses: actions/create-release@v1
-              env:
-                GITHUB_TOKEN: ${{ secrets.TOKEN }}
+            - name: make
+              run: make all
+            - name: make test
+              run: make -f TestMakefile all
+    test:
+        needs: [lint]	
+        name: RunTest
+        runs-on: self-hosted
+        steps:
+            - name: checkout repo
+              uses: actions/checkout@v4
+            - name: make
+              run: make all
+            - name: make test
+              run: make -f TestMakefile all							
+            - name: Test
+              run: ./test
+    build:
+        name: RunPackage
+        needs: [test]
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout repo
+              uses: actions/checkout@v4
+            - name: make
+              run: make all
+            - name: make test
+              run: make -f TestMakefile all							
+            - uses: jiro4989/build-deb-action@v4
               with:
-                tag_name: ${{ github.ref }}
-                release_name: Release ${{ github.ref }}
-                draft: false
-                prerelease: false
-            # - name: Upload Release Asset
-            #   id: upload-release-asset 
-            #   uses: Fhwang0926/upload-release-asset@v1.1.8
-            #   env:
-            #     GITHUB_TOKEN: ${{ secrets.TOKEN }}
-            #   with:
-            #     upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-            #     asset_name: ./package.deb # path + filename
-            #     asset_label: latest
+               package: RWO
+               package_root: package
+               maintainer: Dokotas
+               version: 1.0 # refs/tags/v*.*.*
+               arch: 'amd64' # optional
+               depends: 'libc6 (>= 2.2.1), git' # optional
+               desc: 'this is sample package.' # optional
+               homepage: 'https://github.com/Dokotas/Reverse-Words-Order' # optional      			
