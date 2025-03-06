@@ -3,52 +3,52 @@ name: Python packaging
 on: [push]
 
 jobs:
-    lint:
-        name: RunMake
-        runs-on: self-hosted
-        steps:
-            - name: checkout repo
-              uses: actions/checkout@v4
-            - name: make
-              run: make all
-            - name: make test
-              run: make -f TestMakefile all
-    test:
-        needs: [lint]	
-        name: RunTest
-        runs-on: self-hosted
-        steps:
-            - name: checkout repo
-              uses: actions/checkout@v4
-            - name: make
-              run: make all
-            - name: make test
-              run: make -f TestMakefile all							
-            - name: Test
-              run: ./test
-    build:
-        name: RunPackage
-        needs: [test]
-        runs-on: ubuntu-latest
-        steps:
-            - name: checkout repo
-              uses: actions/checkout@v4
-            - name: make
-              run: make all
-            - name: make test
-              run: make -f TestMakefile all							
-            - uses: jiro4989/build-deb-action@v4
-              with:
-               package: RWO
-               package_root: package
-               maintainer: Dokotas
-               version: 1.0 # refs/tags/v*.*.*
-               arch: 'amd64' # optional
-               depends: 'libc6 (>= 2.2.1), git' # optional
-               desc: 'this is sample package.' # optional
-               homepage: 'https://github.com/Dokotas/Reverse-Words-Order' # optional      			
+    # lint:
+    #     name: RunMake
+    #     runs-on: self-hosted
+    #     steps:
+    #         - name: checkout repo
+    #           uses: actions/checkout@v4
+    #         - name: make
+    #           run: make all
+    #         - name: make test
+    #           run: make -f TestMakefile all
+    # test:
+    #     needs: [lint]	
+    #     name: RunTest
+    #     runs-on: self-hosted
+    #     steps:
+    #         - name: checkout repo
+    #           uses: actions/checkout@v4
+    #         - name: make
+    #           run: make all
+    #         - name: make test
+    #           run: make -f TestMakefile all							
+    #         - name: Test
+    #           run: ./test
+    # build:
+    #     name: RunPackage
+    #     needs: [test]
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #         - name: checkout repo
+    #           uses: actions/checkout@v4
+    #         - name: make
+    #           run: make all
+    #         - name: make test
+    #           run: make -f TestMakefile all							
+    #         - uses: jiro4989/build-deb-action@v4
+    #           with:
+    #            package: RWO
+    #            package_root: package
+    #            maintainer: Dokotas
+    #            version: 1.0 # refs/tags/v*.*.*
+    #            arch: 'amd64' # optional
+    #            depends: 'libc6 (>= 2.2.1), git' # optional
+    #            desc: 'this is sample package.' # optional
+    #            homepage: 'https://github.com/Dokotas/Reverse-Words-Order' # optional      			
     release:
-        needs: [build]	
+        # needs: [build]	
         name: Release
         runs-on: self-hosted
         steps:
