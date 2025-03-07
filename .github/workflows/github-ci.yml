@@ -25,9 +25,9 @@ jobs:
             - name: Test
               run: ./test
     build:
-        name: RunPackage
+        name: RunPackage 
         needs: [test]
-        runs-on: ubuntu-latest
+        runs-on: self-hosted
         steps:
             - name: checkout repo
               uses: actions/checkout@v4
