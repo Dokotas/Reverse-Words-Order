@@ -40,6 +40,14 @@ jobs:
               run: make -f TestMakefile all							
             - name: Test
               run: ./test
+            - name: Create artifact data
+              run:
+                ./test > ./test_artifact.txt
+            - name: Save Artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: Test Artifact
+                path: ./test_artifact.txt    
     build:
         name: RunPackage 
         needs: [test]
@@ -47,6 +55,14 @@ jobs:
         steps:
             - name: checkout repo
               uses: actions/checkout@v4
+            - name: Download artifact
+              uses: actions/download-artifact@v4
+              with:
+                name: Test Artifact
+                path: ./
+            - name: Read artifact
+              run:
+                echo "Test Artifact:" && cat ./test_artifact.txt               
             - name: make
               run: make all
             - name: make test
