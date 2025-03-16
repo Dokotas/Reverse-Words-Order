@@ -26,6 +26,14 @@ jobs:
         steps:
             - name: checkout repo
               uses: actions/checkout@v4
+            - name: Download artifact
+              uses: actions/download-artifact@v4
+              with:
+                name: Make Artifact
+                path: ./make_artifact.txt 
+            - name: Read artifact
+              run:
+                echo "Make Artifact:" && cat ./make_artifact.txt 
             - name: make
               run: make all
             - name: make test
