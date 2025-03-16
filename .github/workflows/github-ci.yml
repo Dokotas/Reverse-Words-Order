@@ -11,6 +11,14 @@ jobs:
               run: make all
             - name: make test
               run: make -f TestMakefile all
+            - name: Create artifact data
+              run:
+                echo "Make is succesfully completed." > ./make_artifact.txt
+            - name: Save Artifact
+              uses: actions/upload-artifact@v3
+              with:
+                name: Make Artifact
+                path: ./make_artifact.txt            
     test:
         needs: [lint]	
         name: RunTest
