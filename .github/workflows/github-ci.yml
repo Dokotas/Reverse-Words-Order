@@ -33,7 +33,7 @@ jobs:
                 path: ./make_artifact.txt 
             - name: Read artifact
               run:
-                echo "Make Artifact:" && cat ./make_artifact.txt 
+                echo "Make Artifact:" && cat make_artifact.txt 
             - name: make
               run: make all
             - name: make test
