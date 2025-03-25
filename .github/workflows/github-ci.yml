@@ -67,16 +67,16 @@ jobs:
               run: make all
             - name: make test
               run: make -f TestMakefile all							
-            - uses: jiro4989/build-deb-action@v4
-              with:
-               package: RWO
-               package_root: package
-               maintainer: Dokotas
-               version: 1.0 # refs/tags/v*.*.*
-               arch: 'amd64' # optional
-               depends: 'libc6 (>= 2.2.1), git' # optional
-               desc: 'this is sample package.' # optional
-               homepage: 'https://github.com/Dokotas/Reverse-Words-Order' # optional  
+            # - uses: jiro4989/build-deb-action@v4
+            #   with:
+            #    package: RWO
+            #    package_root: package
+            #    maintainer: Dokotas
+            #    version: 1.0 # refs/tags/v*.*.*
+            #    arch: 'amd64' # optional
+            #    depends: 'libc6 (>= 2.2.1), git' # optional
+            #    desc: 'this is sample package.' # optional
+            #    homepage: 'https://github.com/Dokotas/Reverse-Words-Order' # optional  
     build-docker:
         name: RunDocker
         needs: [build]
